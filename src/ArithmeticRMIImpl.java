@@ -10,6 +10,8 @@ import java.rmi.server.*;
 
 public class ArithmeticRMIImpl extends UnicastRemoteObject implements ArithmeticInterface
 {
+	
+	
 	// This implementation must have a public constructor.
 	// The constructor throws a RemoteException.
 	public ArithmeticRMIImpl() throws java.rmi.RemoteException
@@ -18,19 +20,24 @@ public class ArithmeticRMIImpl extends UnicastRemoteObject implements Arithmetic
 	}
 		
 	// Implementation of the service defended in the interface
-	public void append(String receiveMag) throws java.rmi.RemoteException
-	{
-	    
-	}
-		
-	public void query(String receiveMag) throws java.rmi.RemoteException
+	public void check(String APIToken,String SecretToken)
 	{
 		
 	}
-		
-	public void delete(String receiveMag) throws java.rmi.RemoteException
+	public int conect(String UserToken)
 	{
-		
+		int roomNum = -1;
+		return roomNum;
+	}
+	public boolean moveChess(int roomNum,int xOfStart,int yOfStart,int xOfEnd,int yOfEnd)
+	{
+		boolean ActionSuccess = false ;
+		return ActionSuccess;
+	}
+	public boolean openChess(int roomNum ,int x,int y)
+	{
+		boolean ActionSuccess = false ;
+		return ActionSuccess;
 	}
 		
 	
