@@ -16,7 +16,7 @@ public class ArithmeticServer
 		//System.setSecurityManager(new RMISecurityManager());
 		try
 		{
-			ArithmeticRMIImpl name = new ArithmeticRMIImpl();
+			ChineseChessArithmeticRMIImpl name = new ChineseChessArithmeticRMIImpl();
 			System.out.println("Registering ...");
 			Naming.rebind("arithmetic", name);	// arithmetic is the name of the service
 			System.out.println("Register success");

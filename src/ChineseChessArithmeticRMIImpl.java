@@ -9,7 +9,7 @@ import java.rmi.*;
 import java.rmi.server.*;
 import java.util.LinkedList;
 
-public class ArithmeticRMIImpl extends UnicastRemoteObject implements ChineseChessArithmeticInterface
+public class ChineseChessArithmeticRMIImpl extends UnicastRemoteObject implements ChineseChessArithmeticInterface
 {
 	
 	
@@ -17,7 +17,7 @@ public class ArithmeticRMIImpl extends UnicastRemoteObject implements ChineseChe
 	private LinkedList<String> waitingPlayer = new LinkedList<String>();
 	// This implementation must have a public constructor.
 	// The constructor throws a RemoteException.
-	public ArithmeticRMIImpl() throws java.rmi.RemoteException
+	public ChineseChessArithmeticRMIImpl() throws java.rmi.RemoteException
 	{
 		super(); 	// Use constructor of parent class
 	}
