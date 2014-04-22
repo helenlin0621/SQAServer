@@ -7,11 +7,14 @@
 //*******************************************************************
 import java.rmi.*;
 import java.rmi.server.*;
+import java.util.LinkedList;
 
 public class ArithmeticRMIImpl extends UnicastRemoteObject implements ArithmeticInterface
 {
 	
 	
+	LinkedList<ChessBoard> room = new LinkedList<ChessBoard>();
+	LinkedList<String> waitingPlayer = new LinkedList<String>();
 	// This implementation must have a public constructor.
 	// The constructor throws a RemoteException.
 	public ArithmeticRMIImpl() throws java.rmi.RemoteException
@@ -20,23 +23,33 @@ public class ArithmeticRMIImpl extends UnicastRemoteObject implements Arithmetic
 	}
 		
 	// Implementation of the service defended in the interface
-	public void check(String APIToken,String SecretToken)
+	public ConnectMsg check(String APIToken,String SecretToken)
 	{
-		
+		ConnectMsg connectMsg = new ConnectMsg();
+		return connectMsg;
 	}
-	public int conect(String UserToken)
+	public int connect(String UserToken)//隨機配對
 	{
+		//給一個RoomNumber
+		int roomNum = -1;
+		return roomNum;
+	}
+	public int connect(String UserToken,String waitingPlayer)//選擇玩家
+	{
+		//給一個RoomNumber
 		int roomNum = -1;
 		return roomNum;
 	}
 	public boolean moveChess(int roomNum,int xOfStart,int yOfStart,int xOfEnd,int yOfEnd)
 	{
 		boolean ActionSuccess = false ;
+		ActionSuccess = room.get(roomNum).moveChess(xOfStart, yOfStart, xOfEnd, yOfEnd);
 		return ActionSuccess;
 	}
 	public boolean openChess(int roomNum ,int x,int y)
 	{
 		boolean ActionSuccess = false ;
+		ActionSuccess = room.get(roomNum).openChess(x, y);
 		return ActionSuccess;
 	}
 		
