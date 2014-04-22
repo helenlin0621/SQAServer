@@ -1,5 +1,5 @@
 import java.util.LinkedList;
-
+/**  房間結束時回傳資料 以及刪除房間問題     **/
 public class Room 
 {
 	int roomNum;
@@ -13,7 +13,7 @@ public class Room
 	public Room(int roomNum,String player0UserToken,String player1UserToken) 
 	{
 		this.roomNum = roomNum;
-		this.chessBoard = new ChessBoard( 10 , 9 ); /*****兩個棋盤不同*****/
+		this.chessBoard = new ChessBoard( 10 , 9 ); /**  兩個棋盤不同  **/
 		this.player0UserToken = player0UserToken;
 		this.player1UserToken = player1UserToken;
 	}
@@ -56,7 +56,7 @@ class ChessBoard
 	private int length ;
 	private int width ;
 	private int[][] chessBoard ;
-	public ChessBoard(int length, int width) /***** 棋盤初始 尚未實作 *****/
+	public ChessBoard(int length, int width) /**   棋盤初始 尚未實作      **/
 	{
 		this.length = length;
 		this.width = width;

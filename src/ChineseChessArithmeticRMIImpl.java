@@ -14,7 +14,7 @@ public class ChineseChessArithmeticRMIImpl extends UnicastRemoteObject implement
 	
 	private int roomNum = 0;
 	private LinkedList<Room> roomlist = new LinkedList<Room>();
-	private LinkedList<String> waitingPlayer = new LinkedList<String>();/*****形態要改過?*****/
+	private LinkedList<String> waitingPlayer = new LinkedList<String>();/**    形態要改過?    **/
 	// This implementation must have a public constructor.
 	// The constructor throws a RemoteException.
 	public ChineseChessArithmeticRMIImpl() throws java.rmi.RemoteException
@@ -28,9 +28,10 @@ public class ChineseChessArithmeticRMIImpl extends UnicastRemoteObject implement
 		ConnectMsg connectMsg = new ConnectMsg();
 		return connectMsg;
 	}
+	/**  詢問玩家是否同意?   **/
 	public int connect(String UserToken)//隨機配對
 	{
-		String rivalToken="";
+		String rivalToken="";//隨機找尋等待玩家清單中的人
 		
 		Room room = new Room(roomNum,UserToken,rivalToken);
 		roomNum ++;
