@@ -7,8 +7,12 @@ import javax.xml.crypto.Data;
 public class ConnectMsg 
 {
 	private String token;
-	private Data startTime;
 	
+	private Data startTime;
+	public ConnectMsg() 
+	{
+
+	}
 	public String getToken() {
 		return token;
 	}

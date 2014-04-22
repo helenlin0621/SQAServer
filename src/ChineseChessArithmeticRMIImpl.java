@@ -12,8 +12,8 @@ import java.util.LinkedList;
 public class ChineseChessArithmeticRMIImpl extends UnicastRemoteObject implements ChineseChessArithmeticInterface
 {
 	
-	
-	private LinkedList<ChessBoard> room = new LinkedList<ChessBoard>();
+	private int roomNum = 0;
+	private LinkedList<Room> roomlist = new LinkedList<Room>();
 	private LinkedList<String> waitingPlayer = new LinkedList<String>();
 	// This implementation must have a public constructor.
 	// The constructor throws a RemoteException.
@@ -30,27 +30,50 @@ public class ChineseChessArithmeticRMIImpl extends UnicastRemoteObject implement
 	}
 	public int connect(String UserToken)//隨機配對
 	{
+		String rivalToken="";
+		
+		Room room = new Room(roomNum,UserToken,rivalToken);
+		roomNum ++;
+		roomlist.add(room);
+		
+		waitingPlayer.remove(rivalToken);
+		
 		//給一個RoomNumber
-		int roomNum = -1;
 		return roomNum;
 	}
-	public int connect(String UserToken,String waitingPlayer)//選擇玩家
+	public int connect(String UserToken,String rivalToken)//選擇玩家
 	{
+		Room room = new Room(roomNum,UserToken,rivalToken);
+		roomNum ++;
+		roomlist.add(room);
+		
+		waitingPlayer.remove(rivalToken);
+		
 		//給一個RoomNumber
-		int roomNum = -1;
 		return roomNum;
 	}
+	private int getRoomIndex(int roomNum)//找到實際的位址
+	{
+		int roomIndex = -1 ;
+		return roomIndex;
+	}
+	
+	//以下為寫完的methoud
 	public boolean moveChess(int roomNum,int xOfStart,int yOfStart,int xOfEnd,int yOfEnd)
 	{
 		boolean ActionSuccess = false ;
-		ActionSuccess = room.get(roomNum).moveChess(xOfStart, yOfStart, xOfEnd, yOfEnd);
+		ActionSuccess = roomlist.get(getRoomIndex(roomNum)).moveChess(xOfStart, yOfStart, xOfEnd, yOfEnd);
 		return ActionSuccess;
 	}
 	public boolean openChess(int roomNum ,int x,int y)
 	{
 		boolean ActionSuccess = false ;
-		ActionSuccess = room.get(roomNum).openChess(x, y);
+		ActionSuccess = roomlist.get(getRoomIndex(roomNum)).openChess(x, y);
 		return ActionSuccess;
+	}
+	public int[][] updateChessBoardInfo(int roomNum) 
+	{
+		return roomlist.get(getRoomIndex(roomNum)).getChessBoard();
 	}
 		
 	
