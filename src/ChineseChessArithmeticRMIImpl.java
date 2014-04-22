@@ -14,7 +14,7 @@ public class ChineseChessArithmeticRMIImpl extends UnicastRemoteObject implement
 	
 	private int roomNum = 0;
 	private LinkedList<Room> roomlist = new LinkedList<Room>();
-	private LinkedList<String> waitingPlayer = new LinkedList<String>();
+	private LinkedList<String> waitingPlayer = new LinkedList<String>();/*****形態要改過?*****/
 	// This implementation must have a public constructor.
 	// The constructor throws a RemoteException.
 	public ChineseChessArithmeticRMIImpl() throws java.rmi.RemoteException
@@ -71,9 +71,16 @@ public class ChineseChessArithmeticRMIImpl extends UnicastRemoteObject implement
 		ActionSuccess = roomlist.get(getRoomIndex(roomNum)).openChess(UserToken,x, y);
 		return ActionSuccess;
 	}
-	public int[][] updateChessBoardInfo(int roomNum) 
+	public int[][] updateChessBoardInfo(int roomNum,String UserToken) 
 	{
-		return roomlist.get(getRoomIndex(roomNum)).getChessBoard();
+		return roomlist.get(getRoomIndex(roomNum)).getChessBoard(UserToken);
+	}
+	
+	public boolean chat(int roomNum,String UserToken,String msg)
+	{
+		boolean ActionSuccess = false ;
+		ActionSuccess = roomlist.get(getRoomIndex(roomNum)).chat(UserToken, msg);
+		return ActionSuccess;
 	}
 		
 	
