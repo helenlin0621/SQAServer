@@ -6,7 +6,7 @@
 //*******************************************************************
 import java.rmi.Remote;
 
-public interface ArithmeticInterface extends Remote
+public interface ChineseChessArithmeticInterface extends Remote
 {
 	public ConnectMsg check(String APIToken,String SecretToken) throws java.rmi.RemoteException;
 	public int connect(String UserToken) throws java.rmi.RemoteException;
