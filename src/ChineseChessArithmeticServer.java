@@ -8,7 +8,7 @@
 import java.rmi.*;
 import java.rmi.server.*;
 
-public class ArithmeticServer
+public class ChineseChessArithmeticServer
 {
 	// Bind ArithmeticServer and Registry
 	public static void main(String args[])
