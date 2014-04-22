@@ -59,16 +59,16 @@ public class ChineseChessArithmeticRMIImpl extends UnicastRemoteObject implement
 	}
 	
 	//以下為寫完的methoud
-	public boolean moveChess(int roomNum,int xOfStart,int yOfStart,int xOfEnd,int yOfEnd)
+	public boolean moveChess(int roomNum,String UserToken,int xOfStart,int yOfStart,int xOfEnd,int yOfEnd)
 	{
 		boolean ActionSuccess = false ;
-		ActionSuccess = roomlist.get(getRoomIndex(roomNum)).moveChess(xOfStart, yOfStart, xOfEnd, yOfEnd);
+		ActionSuccess = roomlist.get(getRoomIndex(roomNum)).moveChess(UserToken,xOfStart, yOfStart, xOfEnd, yOfEnd);
 		return ActionSuccess;
 	}
-	public boolean openChess(int roomNum ,int x,int y)
+	public boolean openChess(int roomNum,String UserToken,int x,int y)
 	{
 		boolean ActionSuccess = false ;
-		ActionSuccess = roomlist.get(getRoomIndex(roomNum)).openChess(x, y);
+		ActionSuccess = roomlist.get(getRoomIndex(roomNum)).openChess(UserToken,x, y);
 		return ActionSuccess;
 	}
 	public int[][] updateChessBoardInfo(int roomNum) 

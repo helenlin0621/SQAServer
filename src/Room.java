@@ -13,19 +13,19 @@ public class Room
 		this.player0UserToken = player0UserToken;
 		this.player1UserToken = player1UserToken;
 	}
-	public boolean changePlayer()
+	private boolean changePlayer()
 	{
 		nowPlay = ( nowPlay + 1 ) % 2;
 		return true;
 	}
 	
 	
-	public boolean moveChess(int xOfStart,int yOfStart,int xOfEnd,int yOfEnd)
+	public boolean moveChess(String UserToken,int xOfStart,int yOfStart,int xOfEnd,int yOfEnd)
 	{
 		boolean ActionSuccess = false ;
 		return ActionSuccess;
 	}
-	public boolean openChess(int x,int y)
+	public boolean openChess(String UserToken,int x,int y)
 	{
 		boolean ActionSuccess = false ;
 		return ActionSuccess;
@@ -45,6 +45,7 @@ class ChessBoard
 	{
 		this.length = length;
 		this.width = width;
+		chessBoard = new int[length][width];
 	}
 	public int[][] getChessBoard() 
 	{
