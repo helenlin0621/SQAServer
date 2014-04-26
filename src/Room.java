@@ -1,3 +1,4 @@
+import java.awt.Image;
 import java.util.LinkedList;
 /**  房間結束時回傳資料 以及刪除房間問題     **/
 public class Room 
@@ -16,6 +17,15 @@ public class Room
 		this.chessBoard = new ChessBoard( 10 , 9 ); /**  兩個棋盤不同  **/
 		this.player0UserToken = player0UserToken;
 		this.player1UserToken = player1UserToken;
+	}
+	public int getRoomNum() {
+		return roomNum;
+	}
+	public String getPlayer0UserToken() {
+		return player0UserToken;
+	}
+	public String getPlayer1UserToken() {
+		return player1UserToken;
 	}
 	private void changePlayer() //改變現在玩家
 	{
@@ -69,10 +79,21 @@ class ChessBoard
 }
 class Player
 {
-	/*
-	 * usertoken
-	 * 對手名子.圖片
-	 * 勝場
-	 * 敗場
-	 */
+	private String userToken;
+	private Image picture;
+	private int win,lose;
+	
+	public String getUserToken() {
+		return userToken;
+	}
+	public Image getPicture() {
+		return picture;
+	}
+	public int getWin() {
+		return win;
+	}
+	public int getLose() {
+		return lose;
+	}
+	
 }

@@ -11,6 +11,9 @@ public interface ChineseChessArithmeticInterface extends Remote
 	public String check(String APIToken,String SecretToken) throws java.rmi.RemoteException;
 	
 	public int connect(String UserToken) throws java.rmi.RemoteException;
+	public int getRoomNum(String userToken) throws java.rmi.RemoteException;
+	public String getRivalToken(int roomNum) throws java.rmi.RemoteException;
+	public Player getRivalData(String rivalToken) throws java.rmi.RemoteException;
 	public int connect(String UserToken,String rivalToken) throws java.rmi.RemoteException;
 	
 	public boolean moveChess(int roomNum,String UserToken,int xOfStart,int yOfStart,int xOfEnd,int yOfEnd) throws java.rmi.RemoteException;

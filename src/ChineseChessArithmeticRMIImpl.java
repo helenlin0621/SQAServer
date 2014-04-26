@@ -8,6 +8,7 @@
 import java.rmi.*;
 import java.rmi.server.*;
 import java.util.Date;
+import java.util.HashMap;
 import java.text.SimpleDateFormat;
 import java.util.LinkedList;
 
@@ -17,9 +18,9 @@ public class ChineseChessArithmeticRMIImpl extends UnicastRemoteObject implement
 	
 	private int roomNum = 0;
 	private LinkedList<Room> roomlist = new LinkedList<Room>();
-	private LinkedList<String> waitingPlayer = new LinkedList<String>();/**    形態要改過?    **/
+	//private LinkedList<String> waitingPlayer = new LinkedList<String>();/**    形態要改過?    **/
 	
-	
+	private HashMap<String, Integer> waitingPlayer = new HashMap<String,Integer>();
 	private LinkedList<Player> online = new LinkedList<Player>();//紀錄每個玩家屬於哪個房間
 	
 	// This implementation must have a public constructor.
@@ -35,6 +36,10 @@ public class ChineseChessArithmeticRMIImpl extends UnicastRemoteObject implement
 		String startTime = getDateTime();
 		return startTime;
 	}
+	
+	
+	
+	//以下為寫完的method
 	private String getDateTime()
 	{
 		SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
@@ -42,38 +47,78 @@ public class ChineseChessArithmeticRMIImpl extends UnicastRemoteObject implement
 		String strDate = sdFormat.format(date);
 		return strDate;
 	}
-	/**  詢問玩家是否同意?   **/
+
 	public int connect(String UserToken)//隨機配對
 	{
-		String rivalToken="";//隨機找尋等待玩家清單中的人
+		String rivalToken="";
+		if(waitingPlayer.isEmpty()){
+			waitingPlayer.put(UserToken, -1);
+			return -1;
+		}else{
+			for (String key : waitingPlayer.keySet()) {
+	           if(waitingPlayer.get(key) == -1){
+	        	   rivalToken = key;
+	        	   waitingPlayer.put(rivalToken, roomNum);
+	        	   break;
+	        	
+	           }
+	           
+	        }
+			//隨機找尋等待玩家清單中的人
+			Room room = new Room(roomNum,UserToken,rivalToken);
+     	   roomNum ++;
+     	   roomlist.add(room);
+     	   return room.getRoomNum();
+		}
 		
-		Room room = new Room(roomNum,UserToken,rivalToken);
-		roomNum ++;
-		roomlist.add(room);
 		
-		waitingPlayer.remove(rivalToken);
-		
-		//給一個RoomNumber
-		return roomNum;
 	}
-	public int connect(String UserToken,String rivalToken)//選擇玩家    萬一不同意 斷線處理
+ 
+	public int getRoomNum(String userToken){
+			//如果還沒有房間 就一直回傳-1
+			int roomNum = waitingPlayer.get(userToken);
+			if(roomNum != -1){
+				waitingPlayer.remove(userToken);
+			}
+			return roomNum;
+	}
+	
+	//配對成功後 對手1取得對手的Token
+	public String getRivalToken(int roomNum){
+		return roomlist.get(getRoomIndex(roomNum)).getPlayer0UserToken();
+	}
+	
+	public Player getRivalData(String rivalToken){
+		Player p = null;
+		for(int i = 0 ; i < online.size() ; i ++){
+			if(online.get(i).getUserToken().equals(rivalToken)){
+				p = online.get(i);
+			}
+		}
+		return p;
+	}
+	
+	
+	public int connect(String UserToken,String rivalToken)//選擇玩家   
 	{
 		Room room = new Room(roomNum,UserToken,rivalToken);
 		roomNum ++;
 		roomlist.add(room);
-		
-		waitingPlayer.remove(rivalToken);
+		waitingPlayer.put(rivalToken, roomNum);
 		
 		//給一個RoomNumber
-		return roomNum;
+		return room.getRoomNum();
 	}
 	private int getRoomIndex(int roomNum)//找到實際的位址
 	{
 		int roomIndex = -1 ;
+		for(int i = 0 ; i < roomlist.size() ; i ++){
+			if(roomlist.get(i).getRoomNum() == roomNum){
+				roomIndex = roomlist.get(i).getRoomNum();
+			}
+		}
 		return roomIndex;
 	}
-	
-	//以下為寫完的methoud
 	public boolean moveChess(int roomNum,String UserToken,int xOfStart,int yOfStart,int xOfEnd,int yOfEnd)
 	{
 		boolean ActionSuccess = false ;
