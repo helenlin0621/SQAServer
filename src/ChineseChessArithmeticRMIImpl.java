@@ -14,7 +14,7 @@ import java.util.LinkedList;
 
 
 public class ChineseChessArithmeticRMIImpl extends UnicastRemoteObject implements ChineseChessArithmeticInterface
-{
+{//
 	
 	private int roomNum = 0;
 	private LinkedList<Room> roomlist = new LinkedList<Room>();

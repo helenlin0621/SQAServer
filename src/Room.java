@@ -3,6 +3,7 @@ import java.util.LinkedList;
 /**  房間結束時回傳資料 以及刪除房間問題     **/
 public class Room 
 {
+	//
 	int roomNum;
 	private ChessBoard chessBoard;
 	private String player0UserToken;
