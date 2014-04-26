@@ -17,14 +17,13 @@ public class Room
 		this.player0UserToken = player0UserToken;
 		this.player1UserToken = player1UserToken;
 	}
-	private boolean changePlayer() //改變現在玩家
+	private void changePlayer() //改變現在玩家
 	{
 		nowPlay = ( nowPlay + 1 ) % 2;
-		return true;
 	}
 	
 	
-	public boolean moveChess(String UserToken,int xOfStart,int yOfStart,int xOfEnd,int yOfEnd)
+	public boolean moveChess(String UserToken,int xOfStart,int yOfStart,int xOfEnd,int yOfEnd)//回傳型態變化
 	{
 		boolean ActionSuccess = false ;
 		
@@ -37,14 +36,14 @@ public class Room
 		//實作 openChess
 		return ActionSuccess;
 	}
-	public int[][] getChessBoard(String UserToken) 
+	public int[][] updateChessBoardInfo(String UserToken) /** 同步資訊問題   **/
 	{
 		//實作 updateChessBoardInfo 當非該玩家時不要讓他更新棋盤 (做等待動作)
 		return chessBoard.getChessBoard();
 	}
 	
 	
-	public boolean chat(String UserToken,String msg)
+	public boolean chat(String UserToken,String msg)/** 同步資訊問題   **/
 	{
 		boolean ActionSuccess = false ;
 		//實作 chat 當某一方玩家使用此method 需通知另一方玩家更新
@@ -67,4 +66,13 @@ class ChessBoard
 		return chessBoard;
 	}
 	
+}
+class WaitingPlayer
+{
+	/*
+	 * usertoken
+	 * 對手名子.圖片
+	 * 勝場
+	 * 敗場
+	 */
 }

@@ -8,7 +8,7 @@ import java.rmi.Remote;
 
 public interface ChineseChessArithmeticInterface extends Remote
 {
-	public ConnectMsg check(String APIToken,String SecretToken) throws java.rmi.RemoteException;
+	public String check(String APIToken,String SecretToken) throws java.rmi.RemoteException;
 	
 	public int connect(String UserToken) throws java.rmi.RemoteException;
 	public int connect(String UserToken,String rivalToken) throws java.rmi.RemoteException;

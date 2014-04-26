@@ -7,14 +7,21 @@
 //*******************************************************************
 import java.rmi.*;
 import java.rmi.server.*;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 import java.util.LinkedList;
+
 
 public class ChineseChessArithmeticRMIImpl extends UnicastRemoteObject implements ChineseChessArithmeticInterface
 {
 	
 	private int roomNum = 0;
 	private LinkedList<Room> roomlist = new LinkedList<Room>();
-	private LinkedList<String> waitingPlayer = new LinkedList<String>();/**    形態要改過?    **/
+	private LinkedList<WaitingPlayer> waitingPlayer = new LinkedList<WaitingPlayer>();/**    形態要改過?    **/
+	
+	
+	private LinkedList<String> inRoom = new LinkedList<String>();//紀錄每個玩家屬於哪個房間
+	
 	// This implementation must have a public constructor.
 	// The constructor throws a RemoteException.
 	public ChineseChessArithmeticRMIImpl() throws java.rmi.RemoteException
@@ -23,10 +30,17 @@ public class ChineseChessArithmeticRMIImpl extends UnicastRemoteObject implement
 	}
 		
 	// Implementation of the service defended in the interface
-	public ConnectMsg check(String APIToken,String SecretToken)
+	public String check(String APIToken,String SecretToken)
 	{
-		ConnectMsg connectMsg = new ConnectMsg();
-		return connectMsg;
+		String startTime = getDateTime();
+		return startTime;
+	}
+	private String getDateTime()
+	{
+		SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
+		Date date = new Date();
+		String strDate = sdFormat.format(date);
+		return strDate;
 	}
 	/**  詢問玩家是否同意?   **/
 	public int connect(String UserToken)//隨機配對
@@ -42,7 +56,7 @@ public class ChineseChessArithmeticRMIImpl extends UnicastRemoteObject implement
 		//給一個RoomNumber
 		return roomNum;
 	}
-	public int connect(String UserToken,String rivalToken)//選擇玩家
+	public int connect(String UserToken,String rivalToken)//選擇玩家    萬一不同意 斷線處理
 	{
 		Room room = new Room(roomNum,UserToken,rivalToken);
 		roomNum ++;
@@ -74,7 +88,7 @@ public class ChineseChessArithmeticRMIImpl extends UnicastRemoteObject implement
 	}
 	public int[][] updateChessBoardInfo(int roomNum,String UserToken) 
 	{
-		return roomlist.get(getRoomIndex(roomNum)).getChessBoard(UserToken);
+		return roomlist.get(getRoomIndex(roomNum)).updateChessBoardInfo(UserToken);
 	}
 	
 	public boolean chat(int roomNum,String UserToken,String msg)
