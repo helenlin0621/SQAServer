@@ -67,7 +67,7 @@ class ChessBoard
 	}
 	
 }
-class WaitingPlayer
+class Player
 {
 	/*
 	 * usertoken

@@ -17,10 +17,10 @@ public class ChineseChessArithmeticRMIImpl extends UnicastRemoteObject implement
 	
 	private int roomNum = 0;
 	private LinkedList<Room> roomlist = new LinkedList<Room>();
-	private LinkedList<WaitingPlayer> waitingPlayer = new LinkedList<WaitingPlayer>();/**    形態要改過?    **/
+	private LinkedList<String> waitingPlayer = new LinkedList<String>();/**    形態要改過?    **/
 	
 	
-	private LinkedList<String> inRoom = new LinkedList<String>();//紀錄每個玩家屬於哪個房間
+	private LinkedList<Player> online = new LinkedList<Player>();//紀錄每個玩家屬於哪個房間
 	
 	// This implementation must have a public constructor.
 	// The constructor throws a RemoteException.
